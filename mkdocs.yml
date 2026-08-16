@@ -1,0 +1,28 @@
+﻿site_name: CPTS Notes - Amogh
+site_url: https://amu132.github.io/CPTS-Notes-Site/
+repo_url: https://github.com/amu132/CPTS-Notes-Site
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: black
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - content.code.copy
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Recon: 01-Recon/
+  - Enumeration: 02-Enumeration/
+  - Web Attacks: 03-Web-Attacks/
+  - Cheatsheets: Cheatsheets/
+  - Methodology: Methodology/

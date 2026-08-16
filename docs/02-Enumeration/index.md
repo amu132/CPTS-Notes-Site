@@ -1,0 +1,3 @@
+﻿# Enumeration Notes
+
+Coming soon...
