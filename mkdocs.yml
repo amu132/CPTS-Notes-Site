@@ -21,9 +21,9 @@ markdown_extensions:
       permalink: true
 nav:
   - Home: index.md
-  - Fundamentals: 00-Fundamentals/
-  - Recon: 01-Recon/
-  - Enumeration: 02-Enumeration/
-  - Web Attacks: 03-Web-Attacks/
-  - Cheatsheets: Cheatsheets/
-  - Methodology: Methodology/
+  - Fundamentals: 00-Fundamentals/index.md
+  - Recon: 01-Recon/index.md
+  - Enumeration: 02-Enumeration/index.md
+  - Web Attacks: 03-Web-Attacks/index.md
+  - Cheatsheets: Cheatsheets/index.md
+  - Methodology: Methodology/index.md
