@@ -1,8 +1,10 @@
-# Fundamentals
+﻿# Fundamentals
 
 Web protocols aur core concepts jo har web pentest ke base hain.
 
 ## Topics
+
+- [Introduction to Web Applications](Web-Applications/Intro-to-Web-Applications.md)
 - [HTTP Basics](HTTP-Basics.md)
 - [HTTPS](HTTPS.md)
 - [HTTP Requests and Responses](HTTP-Requests-Responses.md)
