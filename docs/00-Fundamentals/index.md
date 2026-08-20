@@ -9,6 +9,7 @@ Web protocols aur core concepts jo har web pentest ke base hain.
 - [HTML](Web-Applications/HTML.md)
 - [JavaScript](Web-Applications/JavaScript.md)
 - [Sensitive Data Exposure](Web-Applications/Sensitive-Data-Exposure.md)
+- [HTML Injection](Web-Applications/HTML-Injection.md)
 - [HTTP Basics](HTTP-Basics.md)
 - [HTTPS](HTTPS.md)
 - [HTTP Requests and Responses](HTTP-Requests-Responses.md)
