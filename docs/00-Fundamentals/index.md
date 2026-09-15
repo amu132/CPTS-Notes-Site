@@ -27,3 +27,4 @@ Web protocols aur core concepts jo har web pentest ke base hain.
 - [Intro to Web Proxies](Web-Proxies/Intro-to-Web-Proxies.md)
 - [Intercepting Web Requests](Web-Proxies/Intercepting-Requests.md)
 - [Automatic Modification (Match & Replace)](Web-Proxies/Automatic-Modification.md)
+- [Proxying Tools (Proxychains, Metasploit)](Web-Proxies/Proxying-Tools.md)
