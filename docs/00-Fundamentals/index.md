@@ -29,3 +29,4 @@ Web protocols aur core concepts jo har web pentest ke base hain.
 - [Automatic Modification (Match & Replace)](Web-Proxies/Automatic-Modification.md)
 - [Proxying Tools (Proxychains, Metasploit)](Web-Proxies/Proxying-Tools.md)
 - [Web Fuzzing - Burp Intruder & ZAP Fuzzer](Web-Proxies/Burp-Intruder-ZAP-Fuzzer.md)
+- [Burp Scanner (Crawler, Passive & Active Scanning)](Web-Proxies/Burp-Scanner.md)

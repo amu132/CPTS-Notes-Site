@@ -8,3 +8,4 @@ HTB Academy module - Burp Suite aur OWASP ZAP ka usage, web traffic interception
 - [Automatic Modification (Match & Replace)](Automatic-Modification.md)
 - [Proxying Tools (Proxychains, Metasploit)](Proxying-Tools.md)
 - [Web Fuzzing - Burp Intruder & ZAP Fuzzer](Burp-Intruder-ZAP-Fuzzer.md)
+- [Burp Scanner (Crawler, Passive & Active Scanning)](Burp-Scanner.md)
