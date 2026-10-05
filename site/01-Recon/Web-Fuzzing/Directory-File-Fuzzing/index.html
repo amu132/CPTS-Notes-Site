@@ -8,31 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/01-Recon/">
+        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/01-Recon/Web-Fuzzing/Directory-File-Fuzzing/">
       
       
-        <link rel="prev" href="../00-Fundamentals/">
-      
-      
-        <link rel="next" href="../02-Enumeration/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Recon - CPTS Notes - Amogh</title>
+        <title>Directory and File Fuzzing - CPTS Notes - Amogh</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +47,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#recon" class="md-skip">
+        <a href="#directory-and-file-fuzzing" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +84,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Recon
+              Directory and File Fuzzing
             
           </span>
         </div>
@@ -195,7 +191,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -214,7 +210,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../00-Fundamentals/" class="md-tabs__link">
+      <a href="../../../00-Fundamentals/" class="md-tabs__link">
         
   
   
@@ -231,11 +227,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
         
   
   
@@ -254,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../02-Enumeration/" class="md-tabs__link">
+      <a href="../../../02-Enumeration/" class="md-tabs__link">
         
   
   
@@ -273,7 +267,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../03-Web-Attacks/" class="md-tabs__link">
+      <a href="../../../03-Web-Attacks/" class="md-tabs__link">
         
   
   
@@ -292,7 +286,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../Cheatsheets/" class="md-tabs__link">
+      <a href="../../../Cheatsheets/" class="md-tabs__link">
         
   
   
@@ -311,7 +305,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../Methodology/" class="md-tabs__link">
+      <a href="../../../Methodology/" class="md-tabs__link">
         
   
   
@@ -346,7 +340,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -376,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -403,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../00-Fundamentals/" class="md-nav__link">
+      <a href="../../../00-Fundamentals/" class="md-nav__link">
         
   
   
@@ -427,37 +421,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Recon
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
         
   
   
@@ -473,37 +440,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Topics
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -515,7 +451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-Enumeration/" class="md-nav__link">
+      <a href="../../../02-Enumeration/" class="md-nav__link">
         
   
   
@@ -542,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-Web-Attacks/" class="md-nav__link">
+      <a href="../../../03-Web-Attacks/" class="md-nav__link">
         
   
   
@@ -569,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Cheatsheets/" class="md-nav__link">
+      <a href="../../../Cheatsheets/" class="md-nav__link">
         
   
   
@@ -596,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Methodology/" class="md-nav__link">
+      <a href="../../../Methodology/" class="md-nav__link">
         
   
   
@@ -643,10 +579,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#why-hidden-assets-matter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Topics
+        Why Hidden Assets Matter
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ffuf-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ffuf Basics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Fuzzing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Fuzzing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pentest-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pentest Relevance
       
     </span>
   </a>
@@ -673,12 +653,105 @@
   
 
 
-<h1 id="recon">Recon<a class="headerlink" href="#recon" title="Permanent link">&para;</a></h1>
-<p>Reconnaissance techniques, tools, aur methodology CPTS path ke liye.</p>
-<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<h1 id="directory-and-file-fuzzing">Directory and File Fuzzing<a class="headerlink" href="#directory-and-file-fuzzing" title="Permanent link">&para;</a></h1>
+<h2 id="why-hidden-assets-matter">Why Hidden Assets Matter<a class="headerlink" href="#why-hidden-assets-matter" title="Permanent link">&para;</a></h2>
+<p>Web apps mein aksar <strong>unlinked</strong> directories/files hote hain jo UI se accessible nahi hain lekin exist karte hain:
+- Backup files, config files, logs (sensitive data)
+- Outdated/vulnerable script versions
+- Dev/staging environments, admin panels
+- Undocumented endpoints</p>
+<p>Ye discover karna attack surface samajhne ke liye critical hai.</p>
+<h2 id="ffuf-basics">ffuf Basics<a class="headerlink" href="#ffuf-basics" title="Permanent link">&para;</a></h2>
+<p><strong>Core workflow:</strong>
+1. Wordlist provide karo
+2. URL mein <code>FUZZ</code> keyword placeholder use karo
+3. ffuf har wordlist entry ko <code>FUZZ</code> ki jagah substitute karke request bhejta hai
+4. Response analyze karta hai (status code, length) aur filter karta hai</p>
+<h2 id="directory-fuzzing">Directory Fuzzing<a class="headerlink" href="#directory-fuzzing" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>ffuf<span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt<span class="w"> </span>-u<span class="w"> </span>http://IP:PORT/FUZZ
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-w</code></td>
+<td>Wordlist path</td>
+</tr>
+<tr>
+<td><code>-u</code></td>
+<td>Target URL (FUZZ = placeholder)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result example:</strong> <code>w2ksvrus</code> directory mila (Status 301 = redirect, directory exists hone ka sign)</p>
+<h2 id="file-fuzzing">File Fuzzing<a class="headerlink" href="#file-fuzzing" title="Permanent link">&para;</a></h2>
+<p>Directory ke andar specific files dhundo - common extensions ke saath:</p>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.php</code></td>
+<td>Server-side PHP code</td>
+</tr>
+<tr>
+<td><code>.html</code></td>
+<td>Web page structure</td>
+</tr>
+<tr>
+<td><code>.txt</code></td>
+<td>Plain text (logs, notes)</td>
+</tr>
+<tr>
+<td><code>.bak</code></td>
+<td>Backup files - <strong>high value target</strong></td>
+</tr>
+<tr>
+<td><code>.js</code></td>
+<td>JavaScript</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>ffuf<span class="w"> </span>-w<span class="w"> </span>/usr/share/seclists/Discovery/Web-Content/common.txt<span class="w"> </span>-u<span class="w"> </span>http://IP:PORT/w2ksvrus/FUZZ<span class="w"> </span>-e<span class="w"> </span>.php,.html,.txt,.bak,.js<span class="w"> </span>-v
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-e</code></td>
+<td>Extensions list (comma-separated)</td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>Verbose output (full URL + payload dikhata hai)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>High-value find example:</strong> <code>config.php.bak</code> discover hona = database credentials/API keys leak ho sakte hain.</p>
+</blockquote>
+<h2 id="pentest-relevance">Pentest Relevance<a class="headerlink" href="#pentest-relevance" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="Web-Fuzzing/">Fuzzing Web Applications</a></li>
+<li><code>.bak</code>, <code>.old</code>, <code>.swp</code> jaisi backup file extensions hamesha fuzz karo - developers accidentally chhod dete hain</li>
+<li>301 status = directory exists (redirect to trailing slash) - important signal</li>
+<li>Directory fuzz karne ke baad, usi directory ke andar file fuzzing zaroor karo - nested hidden assets mil sakte hain</li>
 </ul>
+<hr />
+<p><em>Source: HTB Academy - Fuzzing Web Applications</em></p>
 
 
 
@@ -728,10 +801,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
