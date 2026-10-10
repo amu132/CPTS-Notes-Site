@@ -1,0 +1,855 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/00-Fundamentals/Web-Proxies/Intercepting-Requests/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Intercepting Web Requests - CPTS Notes - Amogh</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intercepting-web-requests" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CPTS Notes - Amogh
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Intercepting Web Requests
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/amu132/CPTS-Notes-Site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fundamentals
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../01-Recon/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Recon
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../02-Enumeration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Enumeration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../03-Web-Attacks/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Web Attacks
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Cheatsheets/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheatsheets
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Methodology/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Methodology
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CPTS Notes - Amogh
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/amu132/CPTS-Notes-Site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../01-Recon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-Enumeration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-Web-Attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Cheatsheets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheatsheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methodology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intercepting-requests-burp-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepting Requests — Burp Suite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#intercepting-requests-zap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intercepting Requests — ZAP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Intercepting Requests — ZAP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zap-hud-heads-up-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ZAP HUD (Heads Up Display)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manipulating-intercepted-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manipulating Intercepted Requests
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manipulating Intercepted Requests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-testing-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Testing Use Cases
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-example-command-injection-via-interception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Example — Command Injection via Interception
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pentest-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pentest Relevance
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="intercepting-web-requests">Intercepting Web Requests<a class="headerlink" href="#intercepting-web-requests" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Proxy setup ke baad, hum HTTP requests <strong>intercept</strong> kar sakte hain — request ko destination tak pahunchne se pehle rok ke, dekh ke, modify karke aage bhej sakte hain.</p>
+<h2 id="intercepting-requests-burp-suite">Intercepting Requests — Burp Suite<a class="headerlink" href="#intercepting-requests-burp-suite" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Proxy tab</strong> → <strong>Intercept</strong> sub-tab</li>
+<li>Default: <strong>Intercept is ON</strong> hota hai</li>
+<li>Toggle karne ke liye "Intercept is on/off" button click karo</li>
+<li>Pre-configured browser (Burp's built-in Chromium) se target site visit karo</li>
+<li>Burp mein wapas aao → intercepted request dikhega</li>
+<li><strong>Forward</strong> button → request ko aage bhejo</li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> Kabhi kabhi target request se pehle koi aur (unrelated Firefox traffic) intercept ho jata hai — tab tak <strong>Forward</strong> karte raho jab tak target IP wali request na aaye.</p>
+</blockquote>
+<h2 id="intercepting-requests-zap">Intercepting Requests — ZAP<a class="headerlink" href="#intercepting-requests-zap" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Default: <strong>Intercept OFF</strong> (top bar pe green button = requests pass ho rahi hain)</li>
+<li>Toggle: button click karo, ya shortcut <strong><code>Ctrl+B</code></strong></li>
+<li>Pre-configured browser se target visit karo</li>
+<li>Top-right pane mein intercepted request dikhega</li>
+<li><strong>Step button</strong> (red break button ke paas) → request forward karo</li>
+</ul>
+<h3 id="zap-hud-heads-up-display">ZAP HUD (Heads Up Display)<a class="headerlink" href="#zap-hud-heads-up-display" title="Permanent link">&para;</a></h3>
+<p>ZAP ka powerful feature — browser ke andar hi ZAP ke main features control kar sakte ho.
+- Enable: top menu bar ke end mein HUD button
+- Intercept toggle: left pane ka <strong>2nd button</strong> (top se)
+- Request intercept hone pe dialog aata hai with 3 options:</p>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Step</strong></td>
+<td>Request send karo, response examine karo, agla request bhi break karo</td>
+</tr>
+<tr>
+<td><strong>Continue</strong></td>
+<td>Ye request forward karo, baaki saari requests bhi bina break kiye jaane do</td>
+</tr>
+<tr>
+<td><strong>Drop</strong></td>
+<td>Request cancel/discard karo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step vs Continue kab use karo:</strong>
+- <strong>Step</strong> → jab page ki har functionality step-by-step examine karni ho
+- <strong>Continue</strong> → jab sirf ek specific request mein interest ho, baaki forward kar do</p>
+<blockquote>
+<p><strong>Tip:</strong> Pehli baar ZAP browser use karne pe HUD tutorial milega — le lena, basics samajh aa jaayenge.</p>
+</blockquote>
+<h2 id="manipulating-intercepted-requests">Manipulating Intercepted Requests<a class="headerlink" href="#manipulating-intercepted-requests" title="Permanent link">&para;</a></h2>
+<p>Intercept hone ke baad request <strong>hang</strong> rehti hai jab tak forward na karo — is beech mein:
+- Request examine karo (headers, params, body)
+- Values manipulate karo
+- Phir forward karo → dekho backend kaise react karta hai</p>
+<h3 id="common-testing-use-cases">Common Testing Use Cases<a class="headerlink" href="#common-testing-use-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SQL injection</li>
+<li>Command injection</li>
+<li>Upload bypass</li>
+<li>Authentication bypass</li>
+<li>XSS</li>
+<li>XXE</li>
+<li>Error handling</li>
+<li>Deserialization</li>
+</ul>
+<h2 id="practical-example-command-injection-via-interception">Practical Example — Command Injection via Interception<a class="headerlink" href="#practical-example-command-injection-via-interception" title="Permanent link">&para;</a></h2>
+<p><strong>Scenario:</strong> Ek "Ping" tool hai jo IP address input leta hai. Front-end JS sirf numbers allow karta hai.</p>
+<p><strong>Normal intercepted request:</strong>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/ping</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">94.237.62.138:32306</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">4</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+<span class="err">...</span>
+
+<span class="nt">ip</span><span class="o">=</span><span class="s">1</span>
+</code></pre></div></p>
+<p><strong>Attack idea:</strong> Front-end restriction sirf <strong>client-side</strong> hai — agar back-end bhi validate nahi karta, toh intercept karke bypass kar sakte hain.</p>
+<p><strong>Payload:</strong> <code>ip</code> parameter ki value <code>1</code> se badal ke <code>;ls;</code> kar do:
+<strong>Result:</strong> Response mein normal ping output ki jagah <code>ls</code> command ka output aa gaya (file listing) — matlab <strong>command injection successful</strong>.</p>
+<blockquote>
+<p><strong>Key concept:</strong> "Breaking" the application yahan matlab request/response flow manipulate karna hai (testing purpose), damage karna nahi. Front-end validation bypass karna easy hai jab back-end pe proper validation na ho.</p>
+</blockquote>
+<h2 id="pentest-relevance">Pentest Relevance<a class="headerlink" href="#pentest-relevance" title="Permanent link">&para;</a></h2>
+<ul>
+<li>🎯 <strong>Front-end validation ≠ security</strong> — hamesha back-end validation check karo, front-end restrictions ko trust mat karo</li>
+<li>Intercept + manipulate = manual testing ka <strong>core technique</strong> har web vuln class ke liye (SQLi se lekar auth bypass tak)</li>
+<li>ZAP HUD se browser ke andar hi testing workflow fast ho jata hai, tool switch karne ki zarurat nahi</li>
+<li>Command injection jaisa impactful bug bhi sirf ek intercepted parameter change karne se mil sakta hai — <strong>hamesha every input field test karo</strong>, chahe UI restriction kitni bhi strict lage</li>
+</ul>
+<hr />
+<p><em>Source: HTB Academy - Using Web Proxies</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,959 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://amu132.github.io/CPTS-Notes-Site/01-Recon/Web-Fuzzing/Intro-and-Tooling/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Intro to Web Fuzzing & Tooling Setup - CPTS Notes - Amogh</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intro-to-web-fuzzing-tooling-setup" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-header__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CPTS Notes - Amogh
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Intro to Web Fuzzing &amp; Tooling Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/amu132/CPTS-Notes-Site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../00-Fundamentals/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Fundamentals
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Recon
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../02-Enumeration/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Enumeration
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../03-Web-Attacks/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Web Attacks
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Cheatsheets/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheatsheets
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Methodology/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Methodology
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="CPTS Notes - Amogh" class="md-nav__button md-logo" aria-label="CPTS Notes - Amogh" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CPTS Notes - Amogh
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/amu132/CPTS-Notes-Site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00-Fundamentals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../02-Enumeration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enumeration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../03-Web-Attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Cheatsheets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheatsheets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Methodology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Methodology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-web-fuzzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Web Fuzzing?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fuzzing-vs-brute-forcing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fuzzing vs Brute-forcing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-fuzz-web-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Fuzz Web Applications?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#essential-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Essential Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tooling-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tooling Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tooling Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites-go-python-pipx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites — Go, Python, pipx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ffuf-fuzz-faster-u-fool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FFUF (Fuzz Faster U Fool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gobuster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gobuster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feroxbuster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FeroxBuster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wenum-wfuzz-fork" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        wenum (wfuzz fork)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wordlists-seclists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wordlists - SecLists
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pentest-relevance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pentest Relevance
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="intro-to-web-fuzzing-tooling-setup">Intro to Web Fuzzing &amp; Tooling Setup<a class="headerlink" href="#intro-to-web-fuzzing-tooling-setup" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-web-fuzzing">What is Web Fuzzing?<a class="headerlink" href="#what-is-web-fuzzing" title="Permanent link">&para;</a></h2>
+<p>Web fuzzing = automated testing jisme web application ko <strong>unexpected/random data</strong> diya jata hai vulnerabilities uncover karne ke liye.</p>
+<h2 id="fuzzing-vs-brute-forcing">Fuzzing vs Brute-forcing<a class="headerlink" href="#fuzzing-vs-brute-forcing" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Fuzzing</th>
+<th>Brute-forcing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approach</td>
+<td>Wide net - malformed data, invalid chars, nonsensical combos</td>
+<td>Targeted - specific value guess karna (password, ID)</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>App kaise react karti hai unexpected input pe</td>
+<td>Correct value find karna trial-and-error se</td>
+</tr>
+<tr>
+<td>Analogy</td>
+<td>Lock pe sab kuch try karna (keys, screwdriver, rubber duck)</td>
+<td>Key-ring ki har key try karna</td>
+</tr>
+</tbody>
+</table>
+<h2 id="why-fuzz-web-applications">Why Fuzz Web Applications?<a class="headerlink" href="#why-fuzz-web-applications" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Hidden vulnerabilities</strong> uncover karta hai jo manual testing miss kar sakti hai</li>
+<li><strong>Automation</strong> - time/resources save</li>
+<li><strong>Real-world attack simulation</strong> - attacker techniques mimic karta hai</li>
+<li><strong>Input validation</strong> weaknesses identify karta hai (SQLi/XSS prevention ke liye critical)</li>
+<li><strong>CI/CD integration</strong> possible - continuous security testing</li>
+</ul>
+<h2 id="essential-concepts">Essential Concepts<a class="headerlink" href="#essential-concepts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wordlist</td>
+<td>Potential directory/file/param names ki list</td>
+<td><code>admin</code>, <code>login</code>, <code>backup</code></td>
+</tr>
+<tr>
+<td>Payload</td>
+<td>Actual data jo bheja jata hai</td>
+<td><code>' OR 1=1 --</code> (SQLi)</td>
+</tr>
+<tr>
+<td>Response Analysis</td>
+<td>Status codes/errors analyze karna anomalies ke liye</td>
+<td>500 error with DB message = potential SQLi</td>
+</tr>
+<tr>
+<td>Fuzzer</td>
+<td>Automation tool</td>
+<td>ffuf, wfuzz, Burp Intruder</td>
+</tr>
+<tr>
+<td>False Positive</td>
+<td>Galat tarike se vulnerability flag hona</td>
+<td>404 ko vuln samajh lena</td>
+</tr>
+<tr>
+<td>False Negative</td>
+<td>Real vulnerability miss ho jana</td>
+<td>Logic flaw jo fuzzer catch nahi kar paya</td>
+</tr>
+<tr>
+<td>Fuzzing Scope</td>
+<td>Target ka specific part jo fuzz kar rahe ho</td>
+<td>Sirf login page, ya ek API endpoint</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tooling-setup">Tooling Setup<a class="headerlink" href="#tooling-setup" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites-go-python-pipx">Prerequisites — Go, Python, pipx<a class="headerlink" href="#prerequisites-go-python-pipx" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>golang
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3<span class="w"> </span>python3-pip
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pipx
+pipx<span class="w"> </span>ensurepath
+sudo<span class="w"> </span>pipx<span class="w"> </span>ensurepath<span class="w"> </span>--global
+
+<span class="c1"># Verify</span>
+go<span class="w"> </span>version
+python3<span class="w"> </span>--version
+</code></pre></div>
+<blockquote>
+<p><code>pipx</code> Python apps ko <strong>isolated virtual environments</strong> mein install karta hai - dependency conflicts avoid karta hai.</p>
+</blockquote>
+<h3 id="ffuf-fuzz-faster-u-fool">FFUF (Fuzz Faster U Fool)<a class="headerlink" href="#ffuf-fuzz-faster-u-fool" title="Permanent link">&para;</a></h3>
+<p>Go mein likha, <strong>sabse fast</strong> fuzzer - directories, files, params enumerate karne ke liye.</p>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>install<span class="w"> </span>github.com/ffuf/ffuf/v2@latest
+</code></pre></div>
+<p><strong>Use cases:</strong> Directory/file enumeration, parameter discovery, brute-force attacks</p>
+<h3 id="gobuster">Gobuster<a class="headerlink" href="#gobuster" title="Permanent link">&para;</a></h3>
+<p>Dusra popular directory/file fuzzer - speed + simplicity.</p>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>install<span class="w"> </span>github.com/OJ/gobuster/v3@latest
+</code></pre></div>
+<p><strong>Use cases:</strong> Content discovery, DNS subdomain enumeration, WordPress content detection</p>
+<h3 id="feroxbuster">FeroxBuster<a class="headerlink" href="#feroxbuster" title="Permanent link">&para;</a></h3>
+<p>Rust mein likha - <strong>recursive</strong> content discovery, "forced browsing" tool (fuzzer se zyada).</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sL<span class="w"> </span>https://raw.githubusercontent.com/epi052/feroxbuster/main/install-nix.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>-s<span class="w"> </span><span class="nv">$HOME</span>/.local/bin
+</code></pre></div>
+<p><strong>Use cases:</strong> Recursive scanning, unlinked content discovery, high-performance scans</p>
+<h3 id="wenum-wfuzz-fork">wenum (wfuzz fork)<a class="headerlink" href="#wenum-wfuzz-fork" title="Permanent link">&para;</a></h3>
+<p>Parameter fuzzing ke liye best - highly customizable.</p>
+<div class="highlight"><pre><span></span><code>pipx<span class="w"> </span>install<span class="w"> </span>git+https://github.com/WebFuzzForge/wenum
+pipx<span class="w"> </span>runpip<span class="w"> </span>wenum<span class="w"> </span>install<span class="w"> </span>setuptools
+</code></pre></div>
+<blockquote>
+<p>Note: <code>wfuzz</code> pre-installed ho sakta hai PwnBox/Kali mein, lekin install issues ki wajah se <code>wenum</code> substitute use karo - syntax same hai.</p>
+</blockquote>
+<p><strong>Use cases:</strong> Directory/file enumeration, parameter discovery, brute-force attacks</p>
+<h2 id="wordlists-seclists">Wordlists - SecLists<a class="headerlink" href="#wordlists-seclists" title="Permanent link">&para;</a></h2>
+<p>Sabse comprehensive wordlist collection: <strong>SecLists</strong> (github.com/danielmiessler/SecLists)</p>
+<p>PwnBox pe location: <code>/usr/share/seclists/</code> (lowercase)</p>
+<p><strong>Most-used wordlists:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Wordlist</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Discovery/Web-Content/common.txt</code></td>
+<td>General-purpose, good starting point</td>
+</tr>
+<tr>
+<td><code>Discovery/Web-Content/DirBuster-2007_directory-list-2.3-medium.txt</code></td>
+<td>Deeper directory-focused scan</td>
+</tr>
+<tr>
+<td><code>Discovery/Web-Content/raft-large-directories.txt</code></td>
+<td>Massive directory collection</td>
+</tr>
+<tr>
+<td><code>Discovery/Web-Content/big.txt</code></td>
+<td>Directories + files, wide net</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pentest-relevance">Pentest Relevance<a class="headerlink" href="#pentest-relevance" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Fuzzing = <strong>recon phase ka core technique</strong> - attack surface map karne ke liye zaroori</li>
+<li>Tool choice depends on task: ffuf (speed, general), gobuster (simplicity), feroxbuster (recursive), wenum (parameter-focused)</li>
+<li>SecLists wordlists industry-standard hain - almost har CTF/real engagement mein use hote hain</li>
+</ul>
+<hr />
+<p><em>Source: HTB Academy - Fuzzing Web Applications</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
