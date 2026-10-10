@@ -9,3 +9,4 @@ HTB Academy module - ffuf, gobuster, feroxbuster, wenum se directory, file, aur 
 - [Parameter and Value Fuzzing](Parameter-Value-Fuzzing.md)
 - [Virtual Host and Subdomain Fuzzing](VHost-Subdomain-Fuzzing.md)
 - [Filtering Fuzzing Output](Filtering-Fuzzing-Output.md)
+- [Validating Findings](Validating-Findings.md)
